@@ -1,4 +1,4 @@
-import { FaRegArrowAltCircleRight, FaUserPlus } from "react-icons/fa"; // React Icons
+                                                                                                                                              import { FaRegArrowAltCircleRight, FaUserPlus } from "react-icons/fa"; // React Icons
 
 export default function Home() {
   return (
