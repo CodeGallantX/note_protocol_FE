@@ -8,7 +8,7 @@ const DockFooter = () => {
     <footer className="fixed bottom-10 left-0 right-0 flex justify-center">
       <nav className="flex items-center justify-between gap-6 bg-gray-50/50 border border-black/50 backdrop-blur-md rounded-2xl p-3 md:w-full md:max-w-xs px-6">
         <NavLink
-          to="/home"
+          to="/inbox"
           className={({ isActive }) =>
             `relative flex flex-col items-center text-black ${
               isActive ? "text-black" : "text-black"
@@ -22,13 +22,13 @@ const DockFooter = () => {
           >
             <HiOutlineHome size={22} />
             <span className="absolute bottom-12 px-2 py-1 text-xs text-white bg-gray-700/80 rounded opacity-0 transition-opacity group-hover:opacity-100">
-              Home
+              Inbox
             </span>
           </motion.div>
         </NavLink>
           <span className="h-5 w-[1px] bg-black"></span>
         <NavLink
-          to="/edit"
+          to="/inbox/write"
           className={({ isActive }) =>
             `relative flex flex-col items-center text-black ${
               isActive ? "text-black" : "text-black"
@@ -42,7 +42,7 @@ const DockFooter = () => {
           >
             <HiOutlinePencilSquare size={22} />
             <span className="absolute bottom-12 px-2 py-1 text-xs text-white bg-gray-700/80 rounded opacity-0 transition-opacity group-hover:opacity-100">
-              Edit
+              Write
             </span>
           </motion.div>
         </NavLink>
@@ -50,7 +50,7 @@ const DockFooter = () => {
         <span className="h-5 w-[1px] bg-black"></span>
 
         <NavLink
-          to="/sent"
+          to="/inbox/sent"
           className={({ isActive }) =>
             `relative flex flex-col items-center text-black ${
               isActive ? "text-black" : "text-black"
@@ -72,7 +72,7 @@ const DockFooter = () => {
         <span className="h-5 w-[1px] bg-black"></span>
 
         <NavLink
-          to="/quit"
+          to="/auth/login"
           className={({ isActive }) =>
             `relative flex flex-col items-center text-black ${
               isActive ? "text-black" : "text-black"
@@ -86,7 +86,7 @@ const DockFooter = () => {
           >
             <HiOutlinePower size={22} />
             <span className="absolute bottom-12 px-2 py-1 text-xs text-white bg-gray-700/80 rounded opacity-0 transition-opacity group-hover:opacity-100">
-              Quit
+              Logout
             </span>
           </motion.div>
         </NavLink>

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { FaPaperPlane, FaRegStickyNote } from "react-icons/fa"; // React Icons
+import { FaPaperPlane } from "react-icons/fa"; // React Icons
+import Dock from "../components/Dock";
 
 export default function SendNotes() {
   const [noteMessage, setNoteMessage] = useState("");
@@ -55,7 +56,6 @@ export default function SendNotes() {
             />
           </div>
 
-          {/* Submit Button */}
           <div className="flex justify-center">
             <button
               type="submit"
@@ -66,17 +66,8 @@ export default function SendNotes() {
             </button>
           </div>
         </form>
-
-        {/* Navigation Link */}
-        <div className="mt-6 text-center">
-          <a href="/" >
-            <button className="text-green-500 hover:text-green-600 text-lg font-medium">
-              <FaRegStickyNote className="inline mr-2" />
-              Back to Notes Dashboard
-            </button>
-          </a>
-        </div>
       </div>
+      <Dock />
     </div>
   );
 }

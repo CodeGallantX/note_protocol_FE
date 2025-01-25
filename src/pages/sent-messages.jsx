@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MessageCard from "../components/MessageCard";
 import MessageDetails from "../components/MessageDetails";
+import Dock from "../components/Dock";
 
 const sentMessages = [
   {
@@ -45,8 +46,8 @@ const SentMessagesPage = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold text-teal-600 mb-6">Sent Messages</h1>
+    <div className="p-4 pt-8">
+      <h1 className="text-3xl font-bold text-zinc-700 mb-6">Sent Messages</h1>
 
       {selectedMessage ? (
         <MessageDetails
@@ -66,6 +67,7 @@ const SentMessagesPage = () => {
             ))}
         </div>
       )}
+      <Dock />
     </div>
   );
 };
