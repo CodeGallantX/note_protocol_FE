@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { HomeIcon, PencilIcon, MailIcon, GitHubIcon, LinkedInIcon } from "lucide-react";
 import { Tooltip } from "@headlessui/react";
 
@@ -20,16 +19,18 @@ const DockDemo = () => {
 
 const DockIcon = ({ icon, tooltip }) => {
   return (
-    <Tooltip>
-      <Tooltip.Trigger>
-        <div className="flex items-center justify-center w-12 h-12 bg-gray-700 text-white rounded-full cursor-pointer">
-          {icon}
-        </div>
-      </Tooltip.Trigger>
-      <Tooltip.Content>
-        <p>{tooltip}</p>
-      </Tooltip.Content>
-    </Tooltip>
+    <Tooltip.Provider>
+      <Tooltip>
+        <Tooltip.Trigger>
+          <div className="flex items-center justify-center w-12 h-12 bg-gray-700 text-white rounded-full cursor-pointer">
+            {icon}
+          </div>
+        </Tooltip.Trigger>
+        <Tooltip.Content className="bg-gray-900 text-white text-sm p-2 rounded-md">
+          <p>{tooltip}</p>
+        </Tooltip.Content>
+      </Tooltip>
+    </Tooltip.Provider>
   );
 };
 

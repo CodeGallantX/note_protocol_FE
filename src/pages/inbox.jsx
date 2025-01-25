@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MessageCard from "../components/MessageCard";
 import MessageDetails from "../components/MessageDetails";
+import Dock from "../components/Dock";
 
-// Mock data for messages
 const messages = [
   {
     id: 1,
@@ -71,6 +71,8 @@ const InboxPage = () => {
             ))}
         </div>
       )}
+
+      <Dock />
     </div>
   );
 };
