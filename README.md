@@ -24,8 +24,13 @@ The **Silent-Note Passing Protocol** is a messaging application that allows user
 The **Silent-Note Passing Protocol** aims to simplify the process of sending and receiving private, encrypted notes between users. The app is designed to have:
 
 - **User authentication** for secure access.
+<<<<<<< HEAD
 - **Note passing and receiving** capabilities.
 - **Inbox and Sent notes views** for easy note management.
+=======
+- **Message sending and viewing** capabilities.
+- **Inbox and Sent Messages views** for easy message management.
+>>>>>>> c620377433374aab845422283874547010715d85
 
 This project serves as a minimal, practical example of a WhatsApp-like messaging application built using React.
 
@@ -37,8 +42,13 @@ This project serves as a minimal, practical example of a WhatsApp-like messaging
 - **User Login**: Secure login system to access the messaging platform.
 - **Message Composition**: Write and send messages to other users.
 - **Inbox**: View received messages in a sorted list.
+<<<<<<< HEAD
 - **Sent Notes**: View a history of all sent messages.
 - **Note Details**: View detailed information about each message, including sender, recipient, and timestamp.
+=======
+- **Sent Messages**: View a history of all sent messages.
+- **Message Details**: View detailed information about each message, including sender, recipient, and timestamp.
+>>>>>>> c620377433374aab845422283874547010715d85
 - **Authentication Flow**: Protected routes ensure only logged-in users can access messaging pages.
 
 ---
@@ -62,7 +72,11 @@ This project serves as a minimal, practical example of a WhatsApp-like messaging
 ### Prerequisites
 
 - Node.js and npm installed on your machine.
+<<<<<<< HEAD
 - A backend API Node.js for note storage.
+=======
+- Optionally, a backend API Node.js for message storage.
+>>>>>>> c620377433374aab845422283874547010715d85
 
 ### 1. Clone the repository
 
@@ -79,13 +93,21 @@ cd note_protocol_fe
 ### 3. Install dependencies
 
 ```bash
+<<<<<<< HEAD
 npm install tailwindcss react-router-dom react-icons framer-motion
+=======
+npm install
+>>>>>>> c620377433374aab845422283874547010715d85
 ```
 
 ### 4. Run the application
 
 ```bash
+<<<<<<< HEAD
 npm run dev
+=======
+npm start
+>>>>>>> c620377433374aab845422283874547010715d85
 ```
 
 This will start the React application and open it in your browser. Make sure your backend API is running if you're using one for message storage.
@@ -187,20 +209,36 @@ silent-note-passing-protocol/
 ### **Message Storage**
 
 - Messages are stored and retrieved from the backend API. Example API endpoints:
+<<<<<<< HEAD
   - **POST `/auth/register`**: Register a new user.
   - **POST `/auth/login`**: Log in a user and receive an auth token.
   - **GET `/inbox`**: Fetch received notes for the authenticated user.
   - **GET `/inbox/sent`**: Fetch sent notes for the authenticated user.
   - **POST `/inbox/write`**: Pass a note.
+=======
+  - **POST `/register`**: Register a new user.
+  - **POST `/login`**: Log in a user and receive an auth token.
+  - **GET `/inbox`**: Fetch received messages for the authenticated user.
+  - **GET `/inbox/sent`**: Fetch sent messages for the authenticated user.
+  - **POST `/inbox/write`**: Send a message.
+>>>>>>> c620377433374aab845422283874547010715d85
 
 ### **Routing**
 
 - Use React Router to handle navigation between pages:
+<<<<<<< HEAD
   - `/auth/login`: Login page.
   - `/auth/register`: Registration page.
   - `/inbox`: Inbox page for received notes.
   - `/inbox/sent`: Sent notes page.
   - `/inbox/write`: Page for composing and sending notes.
+=======
+  - `/login`: Login page.
+  - `/register`: Registration page.
+  - `/inbox`: Inbox page for received messages.
+  - `/sent`: Sent messages page.
+  - `/compose`: Page for composing and sending messages.
+>>>>>>> c620377433374aab845422283874547010715d85
 
 ---
 
@@ -221,4 +259,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+<<<<<<< HEAD
 > PS: This **README.md** provides a comprehensive guide to the **Silent-Note Passing Protocol** project, covering the setup, features, components, data flow, and contribution guidelines. It’s intended to help developers understand how to run the project and contribute to its development.
+=======
+This **README.md** provides a comprehensive guide to the **Silent-Note Passing Protocol** project, covering the setup, features, components, data flow, and contribution guidelines. It’s intended to help developers understand how to run the project and contribute to its development.
+>>>>>>> c620377433374aab845422283874547010715d85
