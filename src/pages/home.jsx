@@ -24,7 +24,7 @@ export default function Home() {
               Get Started
             </a>
             <a
-              href="/register"
+              href="/auth/register"
               className="inline-block bg-yellow-400 text-gray-800 text-lg py-3 px-8 rounded-full shadow-lg hover:bg-yellow-500 transition transform hover:scale-105"
             >
               <FaUserPlus className="inline mr-2" />

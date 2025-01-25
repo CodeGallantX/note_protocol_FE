@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
 
-const SignupPage = () => {
+const LoginPage = () => {
   const [formData, setFormData] = useState({
     username: "",
-    email: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [alertVisible, setAlertVisible] = useState(false);
-
-  const navigate = useNavigate(); // Hook to handle navigation
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,15 +21,15 @@ const SignupPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("User Signed Up:", formData);
+    console.log("User Logged In:", formData);
+    // Add login logic here
 
-    // Simulate successful signup
-    setAlertVisible(true);
+    // Show alert message
+    setAlertMessage("Successfully logged in!");
 
-    // Show success message for 3 seconds, then redirect
+    // Hide the alert after 3 seconds
     setTimeout(() => {
-      setAlertVisible(false);
-      navigate("/inbox"); // Redirect to inbox page after signup
+      setAlertMessage("");
     }, 3000);
   };
 
@@ -45,10 +41,22 @@ const SignupPage = () => {
         transition={{ duration: 0.5 }}
         className="w-full max-w-2xl px-4"
       >
-        <div className="bg-white p-6 rounded-none md:rounded-lg shadow-none md:shadow-lg w-full">
-          <h1 className="text-3xl font-bold text-left mb-14 text-teal-600 capitalize">
-            Redefine the concept of passing notes
-          </h1>
+        <div className="bg-white p-8 rounded md:rounded-lg shadow-none md:shadow-lg w-full">
+          <h1 className="text-3xl font-bold text-left mb-12 text-teal-600">Welcome back!</h1>
+
+          {/* Alert Message with transition */}
+          {alertMessage && (
+            <motion.div
+              className="text-center font-semibold bg-green-100 text-sm text-green-500 border-l-2 border-l-green-500  p-2  mb-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+            >
+              {alertMessage}
+            </motion.div>
+          )}
+
           <form onSubmit={handleSubmit}>
             <div className="space-y-6">
               <div>
@@ -62,25 +70,10 @@ const SignupPage = () => {
                   placeholder="Enter your username"
                   value={formData.username}
                   onChange={handleInputChange}
-                  className="mt-2 block w-full rounded-lg border-gray-300 shadow-sm outline-none focus:ring-2 focus:ring-green-500 px-4 py-3"
+                  className="mt-2 block w-full rounded-lg outline-none border-gray-300 shadow focus:ring-1 focus:ring-green-500 px-4 py-3"
                   required
                 />
               </div>
-              {/* <div>
-                <label htmlFor="email" className="block text-lg font-medium text-gray-700">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="mt-2 block w-full rounded-lg border-gray-300 shadow-sm outline-none focus:ring-2 focus:ring-green-500 px-4 py-3"
-                  required
-                />
-              </div> */}
               <div className="relative">
                 <label htmlFor="password" className="block text-lg font-medium text-gray-700">
                   Password
@@ -92,38 +85,32 @@ const SignupPage = () => {
                   placeholder="Enter your password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="mt-2 block w-full rounded-lg border-gray-300 shadow-sm outline-none focus:ring-2 focus:ring-green-500 px-4 py-3"
+                  className="mt-2 block w-full rounded-lg outline-none border-gray-300 shadow focus:ring-1 focus:ring-green-500 px-4 py-3"
                   required
                 />
                 <button
                   type="button"
                   onClick={togglePasswordVisibility}
-                  className="absolute top-10 right-4 text-gray-500 hover:text-gray-700"
+                  className="absolute top-12 right-4 text-gray-500 hover:text-gray-700"
                 >
                   {showPassword ? <HiEyeOff size={24} /> : <HiEye size={24} />}
                 </button>
               </div>
               <button
                 type="submit"
-                className="w-full py-3 px-4 bg-gradient-to-r from-green-400 to-teal-400 text-white font-semibold text-lg rounded-lg shadow-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                className="w-full py-3 px-4 bg-gradient-to-r from-green-400 to-teal-400 text-white font-semibold text-lg rounded-lg shadow-md hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
               >
-                Sign Up
+                Log In
               </button>
             </div>
           </form>
           <p className="text-center mt-6 text-sm text-gray-600">
-            Already have an account? <a href="/auth/login" className="text-green-600 underline">Log in</a>
+            Don&apos;t have an account? <a href="/auth/register" className="text-green-600 underline">Sign up</a>
           </p>
         </div>
       </motion.div>
-
-      {alertVisible && (
-        <div className="absolute top-6 right-4 max-w-xl text-center font-semibold bg-green-100 text-sm text-green-500 border-l-2 border-l-green-500 p-2 mb-4">
-          <p className="text-center">Registration Successful! Redirecting...</p>
-        </div>
-      )}
     </div>
   );
 };
 
-export default SignupPage;
+export default LoginPage;
