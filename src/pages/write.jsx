@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import MessageInput from "../components/MessageInput";
+import Dock from "../components/Dock"
 
 const ComposeNote = () => {
   const [message, setMessage] = useState(null);
@@ -77,6 +78,7 @@ const ComposeNote = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <Dock />
     </div>
   );
 };
