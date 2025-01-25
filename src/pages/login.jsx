@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
@@ -19,15 +20,14 @@ const LoginPage = () => {
     setShowPassword((prev) => !prev);
   };
 
+  const navigate = useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("User Logged In:", formData);
-    // Add login logic here
+    navigate("/inbox")
 
-    // Show alert message
     setAlertMessage("Successfully logged in!");
 
-    // Hide the alert after 3 seconds
     setTimeout(() => {
       setAlertMessage("");
     }, 3000);
@@ -44,7 +44,6 @@ const LoginPage = () => {
         <div className="bg-white p-8 rounded md:rounded-lg shadow-none md:shadow-lg w-full">
           <h1 className="text-3xl font-bold text-left mb-12 text-teal-600">Welcome back!</h1>
 
-          {/* Alert Message with transition */}
           {alertMessage && (
             <motion.div
               className="text-center font-semibold bg-green-100 text-sm text-green-500 border-l-2 border-l-green-500  p-2  mb-4"

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import { HiX } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
@@ -12,7 +13,7 @@ const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [alertVisible, setAlertVisible] = useState(false);
 
-  const navigate = useNavigate(); // Hook to handle navigation
+  const navigate = useNavigate(); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -27,13 +28,11 @@ const SignupPage = () => {
     e.preventDefault();
     console.log("User Signed Up:", formData);
 
-    // Simulate successful signup
     setAlertVisible(true);
 
-    // Show success message for 3 seconds, then redirect
     setTimeout(() => {
       setAlertVisible(false);
-      navigate("/inbox"); // Redirect to inbox page after signup
+      navigate("/inbox");
     }, 3000);
   };
 
@@ -118,9 +117,23 @@ const SignupPage = () => {
       </motion.div>
 
       {alertVisible && (
-        <div className="absolute top-6 right-4 max-w-xl text-center font-semibold bg-green-100 text-sm text-green-500 border-l-2 border-l-green-500 p-2 mb-4">
-          <p className="text-center">Registration Successful! Redirecting...</p>
-        </div>
+        <motion.div
+          className="absolute top-6 right-4 max-w-xl text-center font-semibold bg-green-100 text-sm text-green-500 border-l-2 border-l-green-500 p-2 mb-4 rounded-lg"
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100%" }}
+          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        >
+          <div className="flex justify-between items-center">
+            <p className="text-center">Registration Successful! Redirecting...</p>
+            <button
+              onClick={() => setAlertVisible(false)}
+              className="text-gray-500 hover:text-gray-700"
+            >
+              <HiX size={20} />
+            </button>
+          </div>
+        </motion.div>
       )}
     </div>
   );
