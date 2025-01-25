@@ -1,24 +1,98 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import DockIcon from "./DockIcon";
-import { PiPaperPlaneTilt } from "react-icons/pi";
 import { HiOutlineHome, HiOutlinePencilSquare, HiOutlinePower } from "react-icons/hi2";
+import { PiPaperPlaneTilt } from "react-icons/pi";
+import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 
-const DockDemo = () => {
-
-  const navigate = useNavigate()
+const DockFooter = () => {
   return (
-    <div className="relative max-w-sm rounded-xl h-10 overflow-hidden bg-yellow-50">
-      <div className="absolute bottom-0 left-0 right-0 w-full py-4 bg-yellow bg-opacity-50 backdrop-blur-md shadow-lg rounded-t-xl">
-        <div className="flex justify-around text-black">
-          <DockIcon icon={<HiOutlineHome />} tooltip="Home" onClick={() => navigate("/")} />
-          <DockIcon icon={<HiOutlinePencilSquare />} tooltip="Write" onClick={() => navigate("/write")} />
-          <DockIcon icon={<PiPaperPlaneTilt />} tooltip="Sent" onClick={() => navigate("/sent")} />
-          <DockIcon icon={<HiOutlinePower />} tooltip="Logout" onClick={() => navigate("/")} />
-        </div>
-      </div>
-    </div>
+    <footer className="fixed bottom-10 left-0 right-0 flex justify-center">
+      <nav className="flex items-center justify-between gap-6 bg-gray-50/50 border border-black/50 backdrop-blur-md rounded-2xl p-3 md:w-full md:max-w-xs px-6">
+        <NavLink
+          to="/home"
+          className={({ isActive }) =>
+            `relative flex flex-col items-center text-black ${
+              isActive ? "text-black" : "text-black"
+            }`
+          }
+        >
+          <motion.div
+            whileHover={{ y: -10, rotate: 5 }}
+            whileTap={{ y: 5, rotate: -5 }}
+            className="group flex flex-col items-center"
+          >
+            <HiOutlineHome size={22} />
+            <span className="absolute bottom-12 px-2 py-1 text-xs text-white bg-gray-700/80 rounded opacity-0 transition-opacity group-hover:opacity-100">
+              Home
+            </span>
+          </motion.div>
+        </NavLink>
+          <span className="h-5 w-[1px] bg-black"></span>
+        <NavLink
+          to="/edit"
+          className={({ isActive }) =>
+            `relative flex flex-col items-center text-black ${
+              isActive ? "text-black" : "text-black"
+            }`
+          }
+        >
+          <motion.div
+            whileHover={{ y: -10, rotate: 5 }}
+            whileTap={{ y: 5, rotate: -5 }}
+            className="group flex flex-col items-center"
+          >
+            <HiOutlinePencilSquare size={22} />
+            <span className="absolute bottom-12 px-2 py-1 text-xs text-white bg-gray-700/80 rounded opacity-0 transition-opacity group-hover:opacity-100">
+              Edit
+            </span>
+          </motion.div>
+        </NavLink>
+
+        <span className="h-5 w-[1px] bg-black"></span>
+
+        <NavLink
+          to="/sent"
+          className={({ isActive }) =>
+            `relative flex flex-col items-center text-black ${
+              isActive ? "text-black" : "text-black"
+            }`
+          }
+        >
+          <motion.div
+            whileHover={{ y: -10, rotate: 5 }}
+            whileTap={{ y: 5, rotate: -5 }}
+            className="group flex flex-col items-center"
+          >
+            <PiPaperPlaneTilt size={22} />
+            <span className="absolute bottom-12 px-2 py-1 text-xs text-white bg-gray-700/80 rounded opacity-0 transition-opacity group-hover:opacity-100">
+              Sent
+            </span>
+          </motion.div>
+        </NavLink>
+
+        <span className="h-5 w-[1px] bg-black"></span>
+
+        <NavLink
+          to="/quit"
+          className={({ isActive }) =>
+            `relative flex flex-col items-center text-black ${
+              isActive ? "text-black" : "text-black"
+            }`
+          }
+        >
+          <motion.div
+            whileHover={{ y: -10, rotate: 5 }}
+            whileTap={{ y: 5, rotate: -5 }}
+            className="group flex flex-col items-center"
+          >
+            <HiOutlinePower size={22} />
+            <span className="absolute bottom-12 px-2 py-1 text-xs text-white bg-gray-700/80 rounded opacity-0 transition-opacity group-hover:opacity-100">
+              Quit
+            </span>
+          </motion.div>
+        </NavLink>
+      </nav>
+    </footer>
   );
 };
 
-export default DockDemo;
+export default DockFooter;
