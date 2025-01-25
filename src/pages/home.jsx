@@ -17,19 +17,19 @@ export default function Home() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mt-8">
             <a
-              href="/send-notes"
+              href="/auth/register"
               className="inline-block bg-green-400 text-gray-800 text-lg py-3 px-8 rounded-full shadow-lg hover:bg-green-500 transition transform hover:scale-105"
             >
               <FaRegArrowAltCircleRight className="inline mr-2" />
               Get Started
             </a>
-            <a
+            {/* <a
               href="/auth/register"
               className="inline-block bg-yellow-400 text-gray-800 text-lg py-3 px-8 rounded-full shadow-lg hover:bg-yellow-500 transition transform hover:scale-105"
             >
               <FaUserPlus className="inline mr-2" />
               Register
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
