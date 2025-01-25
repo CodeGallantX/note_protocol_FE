@@ -181,7 +181,7 @@ silent-note-passing-protocol/
 ### **Authentication**
 
 - Custom backend API
-- 
+
 ### **Message Storage**
 
 - Messages are stored and retrieved from the backend API. Example API endpoints:
@@ -215,8 +215,6 @@ silent-note-passing-protocol/
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
-
 ---
 
 > PS: This **README.md** provides a comprehensive guide to the **Silent-Note Passing Protocol** project, covering the setup, features, components, data flow, and contribution guidelines. It’s intended to help developers understand how to run the project and contribute to its development.
