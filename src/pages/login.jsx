@@ -10,9 +10,20 @@ const LoginPage = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [usernameError, setUsernameError] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    
+    if (name === "username") {
+      const usernameRegex = /^[a-z0-9_]+$/;
+      if (!usernameRegex.test(value)) {
+        setUsernameError("Username can only contain lowercase letters, numbers, and underscores.");
+      } else {
+        setUsernameError("");
+      }
+    }
+
     setFormData({ ...formData, [name]: value });
   };
 
@@ -20,17 +31,19 @@ const LoginPage = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("User Logged In:", formData);
-    navigate("/inbox")
 
-    setAlertMessage("Successfully logged in!");
+    if (!usernameError) {
+      navigate("/inbox");
+      setAlertMessage("Successfully logged in!");
 
-    setTimeout(() => {
-      setAlertMessage("");
-    }, 3000);
+      setTimeout(() => {
+        setAlertMessage("");
+      }, 3000);
+    }
   };
 
   return (
@@ -66,12 +79,15 @@ const LoginPage = () => {
                   id="username"
                   name="username"
                   type="text"
-                  placeholder="Enter your username"
+                  placeholder="e.g., darealgoat_007"
                   value={formData.username}
                   onChange={handleInputChange}
                   className="mt-2 block w-full rounded-lg outline-none border-gray-300 shadow focus:ring-1 focus:ring-green-500 px-4 py-3"
                   required
                 />
+                {usernameError && (
+                  <p className="text-red-500 text-sm mt-1">{usernameError}</p>
+                )}
               </div>
               <div className="relative">
                 <label htmlFor="password" className="block text-lg font-medium text-gray-700">

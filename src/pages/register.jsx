@@ -7,17 +7,24 @@ import { useNavigate } from "react-router-dom";
 const SignupPage = () => {
   const [formData, setFormData] = useState({
     username: "",
-    email: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [alertVisible, setAlertVisible] = useState(false);
-
-  const navigate = useNavigate(); 
+  const [usernameError, setUsernameError] = useState("");
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    
+    if (name === "username") {
+      if (/^[a-z0-9_]+$/.test(value)) {
+        setUsernameError("");
+      } else {
+        setUsernameError("Username must only contain lowercase letters, numbers, and underscores.");
+      }
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -26,6 +33,9 @@ const SignupPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (usernameError) return;
+
     console.log("User Signed Up:", formData);
 
     setAlertVisible(true);
@@ -58,28 +68,16 @@ const SignupPage = () => {
                   id="username"
                   name="username"
                   type="text"
-                  placeholder="Enter your username"
+                  placeholder="e.g., thecoolkid_348"
                   value={formData.username}
                   onChange={handleInputChange}
                   className="mt-2 block w-full rounded-lg border-gray-300 shadow-sm outline-none focus:ring-2 focus:ring-green-500 px-4 py-3"
                   required
                 />
+                  <span className="text-sm text-gray-400 font-normal italic mt-1 ml-1">It doesn&apos;t have to be your real name</span>
+                {usernameError && <p className="text-sm text-red-500 mt-2">{usernameError}</p>}
               </div>
-              {/* <div>
-                <label htmlFor="email" className="block text-lg font-medium text-gray-700">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="mt-2 block w-full rounded-lg border-gray-300 shadow-sm outline-none focus:ring-2 focus:ring-green-500 px-4 py-3"
-                  required
-                />
-              </div> */}
+              
               <div className="relative">
                 <label htmlFor="password" className="block text-lg font-medium text-gray-700">
                   Password
