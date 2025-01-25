@@ -1,16 +1,17 @@
-import { HomeIcon, PencilIcon, MailIcon, GitHubIcon, LinkedInIcon } from "lucide-react";
-import { Tooltip } from "@headlessui/react";
+import { useState } from "react";
+import { Tooltip } from "react-tooltip";
+import { PiPaperPlaneTilt } from "react-icons/pi";
+import { HiOutlineHome, HiOutlinePencilSquare, HiOutlinePower } from "react-icons/hi2";
 
 const DockDemo = () => {
   return (
-    <div className="relative w-full h-screen overflow-hidden">
-      <div className="absolute bottom-0 left-0 right-0 w-full py-5 bg-gray-800 shadow-lg">
-        <div className="flex justify-around">
-          <DockIcon icon={<HomeIcon />} tooltip="Home" />
-          <DockIcon icon={<PencilIcon />} tooltip="Edit" />
-          <DockIcon icon={<MailIcon />} tooltip="Messages" />
-          <DockIcon icon={<LinkedInIcon />} tooltip="LinkedIn" />
-          <DockIcon icon={<GitHubIcon />} tooltip="GitHub" />
+    <div className="relative max-w-lg h-20 overflow-hidden bg-gray-50">
+      <div className="absolute bottom-0 left-0 right-0 w-full py-4 bg-white bg-opacity-50 backdrop-blur-md shadow-lg rounded-t-xl">
+        <div className="flex justify-around text-black">
+          <DockIcon icon={<HiOutlineHome />} tooltip="Home" />
+          <DockIcon icon={<HiOutlinePencilSquare />} tooltip="Edit" />
+          <DockIcon icon={<PiPaperPlaneTilt />} tooltip="LinkedIn" />
+          <DockIcon icon={<HiOutlinePower />} tooltip="GitHub" />
         </div>
       </div>
     </div>
@@ -19,18 +20,14 @@ const DockDemo = () => {
 
 const DockIcon = ({ icon, tooltip }) => {
   return (
-    <Tooltip.Provider>
-      <Tooltip>
-        <Tooltip.Trigger>
-          <div className="flex items-center justify-center w-12 h-12 bg-gray-700 text-white rounded-full cursor-pointer">
-            {icon}
-          </div>
-        </Tooltip.Trigger>
-        <Tooltip.Content className="bg-gray-900 text-white text-sm p-2 rounded-md">
-          <p>{tooltip}</p>
-        </Tooltip.Content>
+    <div className="relative group">
+      {/* Tooltip */}
+      <Tooltip content={tooltip} className="absolute bottom-full mb-2 w-max p-2 text-sm bg-gray-800 text-white rounded">
+        <div className="flex items-center justify-center w-12 h-12 bg-white bg-opacity-20 text-black rounded-full cursor-pointer group-hover:scale-125 transition-transform hover:bg-opacity-30">
+          {icon} {/* Use icon component directly here */}
+        </div>
       </Tooltip>
-    </Tooltip.Provider>
+    </div>
   );
 };
 
