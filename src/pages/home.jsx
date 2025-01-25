@@ -1,4 +1,4 @@
-import { FaRegArrowAltCircleRight, FaUserPlus } from "react-icons/fa"; // React Icons
+import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
 export default function Home() {
   return (
@@ -8,11 +8,16 @@ export default function Home() {
         <div className="text-center space-y-8 max-w-4xl mx-auto">
           {/* Hero Section */}
           <h1 className="text-5xl font-extrabold leading-tight tracking-tight sm:text-6xl md:text-7xl">
-            Welcome to Class Note Protocol
+            Silent-Note Passing Protocol (SNPP)
           </h1>
-          <p className="text-lg sm:text-xl max-w-2xl mx-auto">
+          {/* <p className="text-lg sm:text-xl max-w-2xl mx-auto">
             Streamlining communication with a secure and efficient platform to send and receive notes. Focus on learning while we handle your notes!
+          </p> */}
+          <p className="text-lg sm:text-xl max-w-2xl mx-auto">
+            Psst! Need to share notes with classmates without saying a word?
           </p>
+
+
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mt-8">
