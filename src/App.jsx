@@ -16,7 +16,6 @@ const App = () => {
       <Route path="/inbox" element={<Inbox />} />
       <Route path="/inbox/sent" element={<Sent />} />
       <Route path="/inbox/write" element={<Write />} />
-      <Route path="/view-notes" element={<ViewNotes />} />
     </Routes>
   )
 }

@@ -23,7 +23,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mt-8">
             <a
               href="/auth/register"
-              className="inline-block bg-green-400 text-gray-800 text-lg py-3 px-8 rounded-full shadow-lg hover:bg-green-500 transition transform hover:scale-105"
+              className="inline-block bg-teal-400 text-gray-50 text-lg py-3 px-8 rounded-full shadow-lg hover:bg-teal-500 transition transform hover:scale-105"
             >
               <FaRegArrowAltCircleRight className="inline mr-2" />
               Get Started
