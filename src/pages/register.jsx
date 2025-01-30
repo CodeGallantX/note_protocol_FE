@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { HiX } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [alertVisible, setAlertVisible] = useState(false);
   const [usernameError, setUsernameError] = useState("");
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -31,19 +33,40 @@ const SignupPage = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (usernameError) return;
+    if (usernameError || formData.username === "" || formData.password === "") return;
 
-    console.log("User Signed Up:", formData);
+    setLoading(true); 
 
-    setAlertVisible(true);
+    try {
+      const response = await axios.post(
+        "https://silent-note-protocol-be.onrender.com/api/register/", 
+        {
+          username: formData.username,
+          password: formData.password,
+        }
+      );
 
-    setTimeout(() => {
+      if (response.status === 201) {
+        // If registration is successful, show success alert and redirect after 3 seconds
+        setAlertVisible(true);
+        setTimeout(() => {
+          setAlertVisible(false);
+          navigate("/inbox");
+        }, 3000);
+      } else {
+        // Handle unexpected response
+        alert("Unexpected response, please try again.");
+      }
+    } catch (error) {
+      console.error("Registration failed:", error);
       setAlertVisible(false);
-      navigate("/inbox");
-    }, 3000);
+      alert("Registration failed, please try again.");
+    } finally {
+      setLoading(false);
+    };
   };
 
   return (
@@ -103,8 +126,9 @@ const SignupPage = () => {
               <button
                 type="submit"
                 className="w-full py-3 px-4 bg-gradient-to-r from-green-400 to-teal-400 text-white font-semibold text-lg rounded-lg shadow-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                disabled={loading} // Disable button while loading
               >
-                Sign Up
+                {loading ? "Registering..." : "Sign Up"}
               </button>
             </div>
           </form>

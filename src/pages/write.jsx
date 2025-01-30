@@ -1,21 +1,37 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import axios from "axios";
 import MessageInput from "../components/MessageInput";
-import Dock from "../components/Dock"
+import Dock from "../components/Dock";
 
 const ComposeNote = () => {
   const [message, setMessage] = useState(null);
   const [showOutput, setShowOutput] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const handleSendMessage = (newMessage) => {
-    setMessage(newMessage);
-    setShowConfirmation(true); 
-    setTimeout(() => setShowConfirmation(false), 3000); 
+  const handleSendMessage = async (newMessage) => {
+    try {
+      // Send message data to the backend API
+      const response = await axios.post(
+        "https://silent-note-protocol-be.onrender.com/api/write/",
+        { message: newMessage },
+        {
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`, // Include token from localStorage
+          },
+        }
+      );
+
+      setMessage(response.data); // Assuming the API returns the message object
+      setShowConfirmation(true);
+      setTimeout(() => setShowConfirmation(false), 3000); // Hide confirmation after 3 seconds
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
   };
 
   const handleShowOutput = () => {
-    setShowOutput(true); 
+    setShowOutput(true);
   };
 
   const handleCloseModal = () => {
@@ -26,7 +42,7 @@ const ComposeNote = () => {
     <div className="flex flex-col items-center justify-center h-screen bg-white">
       <h1 className="mb-6 text-xl font-bold text-gray-700">Write a Note</h1>
       <MessageInput onSend={handleSendMessage} />
-      
+
       {showConfirmation && (
         <motion.div
           className="absolute top-2 left-1/2 -translate-x-1/2 right-0 max-w-xs shadow-md text-black p-4 pt-2 border border-black/50 rounded-md text-center"

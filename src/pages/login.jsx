@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import axios from "axios";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -11,14 +12,19 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [usernameError, setUsernameError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
+
     if (name === "username") {
       const usernameRegex = /^[a-z0-9_]+$/;
       if (!usernameRegex.test(value)) {
-        setUsernameError("Username can only contain lowercase letters, numbers, and underscores.");
+        setUsernameError(
+          "Username can only contain lowercase letters, numbers, and underscores."
+        );
       } else {
         setUsernameError("");
       }
@@ -31,18 +37,41 @@ const LoginPage = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("User Logged In:", formData);
 
-    if (!usernameError) {
-      navigate("/inbox");
+    if (usernameError || formData.username === "" || formData.password === "") return;
+
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+        "https://silent-note-protocol-be.onrender.com/api/login/",
+        {
+          username: formData.username,
+          password: formData.password,
+        }
+      );
+
+      // Assuming the API responds with tokens
+      const { access, refresh } = response.data;
+
+      // Save tokens to localStorage
+      localStorage.setItem("accessToken", access);
+      localStorage.setItem("refreshToken", refresh);
+
       setAlertMessage("Successfully logged in!");
+      setTimeout(() => setAlertMessage(""), 3000);
 
-      setTimeout(() => {
-        setAlertMessage("");
-      }, 3000);
+      navigate("/inbox");
+    } catch (error) {
+      console.error("Login failed:", error);
+      setAlertMessage(
+        error.response?.data?.detail || "Invalid username or password."
+      );
+      setTimeout(() => setAlertMessage(""), 3000);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,11 +84,17 @@ const LoginPage = () => {
         className="w-full max-w-2xl px-4"
       >
         <div className="bg-white p-8 rounded md:rounded-lg shadow-none md:shadow-lg w-full">
-          <h1 className="text-3xl font-bold text-left mb-12 text-teal-600">Welcome back!</h1>
+          <h1 className="text-3xl font-bold text-left mb-12 text-teal-600">
+            Welcome back!
+          </h1>
 
           {alertMessage && (
             <motion.div
-              className="text-center font-semibold bg-green-100 text-sm text-green-500 border-l-2 border-l-green-500  p-2  mb-4"
+              className={`text-center font-semibold ${
+                alertMessage.includes("Successfully")
+                  ? "bg-green-100 text-green-500 border-green-500"
+                  : "bg-red-100 text-red-500 border-red-500"
+              } text-sm border-l-2 p-2 mb-4`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -72,7 +107,10 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit}>
             <div className="space-y-6">
               <div>
-                <label htmlFor="username" className="block text-lg font-medium text-gray-700">
+                <label
+                  htmlFor="username"
+                  className="block text-lg font-medium text-gray-700"
+                >
                   Username
                 </label>
                 <input
@@ -89,8 +127,12 @@ const LoginPage = () => {
                   <p className="text-red-500 text-sm mt-1">{usernameError}</p>
                 )}
               </div>
+
               <div className="relative">
-                <label htmlFor="password" className="block text-lg font-medium text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="block text-lg font-medium text-gray-700"
+                >
                   Password
                 </label>
                 <input
@@ -111,16 +153,24 @@ const LoginPage = () => {
                   {showPassword ? <HiEyeOff size={24} /> : <HiEye size={24} />}
                 </button>
               </div>
+
               <button
                 type="submit"
-                className="w-full py-3 px-4 bg-gradient-to-r from-green-400 to-teal-400 text-white font-semibold text-lg rounded-lg shadow-md hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                className={`w-full py-3 px-4 bg-gradient-to-r from-green-400 to-teal-400 text-white font-semibold text-lg rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 ${
+                  loading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                disabled={loading}
               >
-                Log In
+                {loading ? "Logging in..." : "Log In"}
               </button>
             </div>
           </form>
+
           <p className="text-center mt-6 text-sm text-gray-600">
-            Don&apos;t have an account? <a href="/auth/register" className="text-green-600 underline">Sign up</a>
+            Don&apos;t have an account?{" "}
+            <a href="/auth/register" className="text-green-600 underline">
+              Sign up
+            </a>
           </p>
         </div>
       </motion.div>
